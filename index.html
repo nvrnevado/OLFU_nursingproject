@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OLFU Nursing Project</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+    body {
+      font-family: "TikTok Sans", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 28px;
+      background: #f6f8f0;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #e87d7d;
+      color: white;
+      padding: 1.5em;
+      text-align: center;
+    }
+    main {
+      padding: 2em;
+    }
+    section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5em;
+      margin-bottom: 2em;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+    h1, h2 {
+      font-family: "Schoolbell", cursive;
+      font-weight: 900;
+      font-style: normal;    
+      font-size: 55px;
+    }
+    a.button {
+      display: inline-block;
+      background: #e87d7d;
+      color: white;
+      padding: 0.6em 1.2em;
+      margin-top: 0.5em;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+    a.button:hover {
+      background: #be5b5b;
+    }
+    .chatbox {
+      background: #f7fbfe;
+      border: 1px solid #cfdce6;
+      border-radius: 10px;
+      padding: 1em;
+      height: 250px;
+      overflow-y: auto;
+      font-size: 1em;
+    }
+    .input-area {
+      margin-top: 1em;
+      display: flex;
+      gap: 0.5em;
+    }
+    .input-area input {
+      flex: 1;
+      padding: 0.6em;
+      border: 1px solid #c0c8d1;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    .input-area button {
+      padding: 0.6em 1.2em;
+      background: #e87d7d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+    .input-area button:hover {
+      background: #e87d7d;
+    }
+    .number-box {
+      font-size: 1.1em;
+      margin-bottom: 0.5em;
+      padding: 0.4em 0.8em;
+      background: #eef4f8;
+      border-left: 4px solid #e87d7d;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>'' Hello Lola, Hey Lolo! ,,</h1>
+    <p> made with love by Nevado N.R, BSN2, Section 17 ♡</p>
+  </header>
+  <main>
+
+    <section style="display: flex; justify-content: center;">
+        <audio id="bgMusic" controls autoplay loop>
+            <source src="music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
+
+    <section>
+      <h2>Health Bot</h2>
+      <div class="chatbox" id="chatbox">
+        <p><strong>Bot:</strong> Kumusta! Ako ang iyong health bot. Anong nais mong itanong?</p>
+      </div>
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="I-type ang tanong mo...">
+        <button onclick="respond()">Ipadala</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Emergency Numbers</h2>
+      <div class="number-box">911 - Pambansang Emergency Hotline</div>
+      <div class="number-box">143 - Philippine Red Cross</div>
+      <div class="number-box">1555 - DOH COVID-19 Hotline</div>
+      <div class="number-box">117 - PNP Emergency</div>
+    </section>
+
+    <section>
+      <h2>Mahahalagang Website || Important Websites</h2>
+      <p><a class="button" href="https://www.who.int" target="_blank">World Health Organization</a></p>
+      <p><a class="button" href="https://www.cdc.gov" target="_blank">CDC</a></p>
+      <p><a class="button" href="https://www.doh.gov.ph" target="_blank">DOH Pilipinas</a></p>
+      <p><a class="button" href="https://redcross.org.ph" target="_blank">Philippine Red Cross</a></p>
+      <p><a class="button" href="https://www.philhealth.gov.ph" target="_blank">PhilHealth</a></p>
+      
+    </section>
+  </main>
+
+  <script>
+    function respond() {
+      const input = document.getElementById('userInput');
+      const chatbox = document.getElementById('chatbox');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      const response = getBotResponse(userText);
+      chatbox.innerHTML += `<p><strong>Ikaw:</strong> ${userText}</p>`;
+      chatbox.innerHTML += `<p><strong>Bot:</strong> ${response}</p>`;
+      chatbox.scrollTop = chatbox.scrollHeight;
+      input.value = '';
+    }
+
+    function getBotResponse(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("sakit ng ulo") || msg.includes("headache")) return "Magpahinga at uminom ng tubig. Iwasan ang maingay na lugar. Kung tuloy-tuloy, kumonsulta sa doktor.";
+      if (msg.includes("lagnat") || msg.includes("fever")) return "Sukatin ang temperatura. Uminom ng maraming tubig. Kung lampas 38°C nang higit isang araw, tumawag sa doktor.";
+      if (msg.includes("gamot") || msg.includes("medicine")) return "Sundin ang reseta ng iyong doktor. Iwasan ang pag-inom ng gamot nang walang payo.";
+      if (msg.includes("emergency")) return "Kung emergency ito, tumawag agad sa 911.";
+      if (msg.includes("presyon") || msg.includes("blood pressure")) return "Karaniwang normal ang 120/80. Kung masyadong mataas o mababa, magpakonsulta sa doktor.";
+
+      return "Pasensya na, hindi ko alam ang sagot. Mas mabuting kumonsulta sa doktor o tumawag sa health hotline.";
+    }
+
+        window.addEventListener('DOMContentLoaded', () => {
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0;
+
+    let fadeIn = setInterval(() => {
+        if (bgMusic.volume < 0.3) {
+        bgMusic.volume = Math.min(bgMusic.volume + 0.01, 0.3);
+        } else {
+        clearInterval(fadeIn);
+        }
+    }, 200);
+    });
+  </script>
+</body>
+</html> 
